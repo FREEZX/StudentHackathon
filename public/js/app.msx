@@ -25,12 +25,9 @@ var Chat = require('./components/Chat');
 var Thread = require('./components/Thread');
 var ThreadCreate = require('./components/ThreadCreate');
 var Library = require('./components/Library');
-<<<<<<< HEAD
 var Polls = require('./components/Polls');
 var Poll = require('./components/Poll');
-=======
 var LibraryItem = require('./components/LibraryItem');
->>>>>>> 4f4eb98b0cead5904312ea797066493837ad32b1
 
 m.route.mode = 'hash';
 
@@ -43,21 +40,14 @@ domready(function() {
       '/login': Login,
       '/logout': Logout,
       '/signup': Signup,
-<<<<<<< HEAD
       '/library': Library,
       '/polls': Polls,
       '/polls/:pollId': Poll
-=======
-<<<<<<< HEAD
       '/library': Library,
       '/library/:itemId': LibraryItem
-=======
       '/forum' : Forum,
       '/chat' : Chat,
       '/thread/:threadId' : Thread,
       '/threadcreate' : ThreadCreate
-      '/library': Library
->>>>>>> d73b29e13a069180280086d998d8b5d4b92804f6
->>>>>>> 4f4eb98b0cead5904312ea797066493837ad32b1
     });
 });

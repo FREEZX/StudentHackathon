@@ -10,17 +10,17 @@ var Home = {
  		this.openthread= function(event){
  			event.preventDefault();
  			m.route("/thread/threadId");
- 		}
+ 		},
  		this.forumcreate= function(event){
  			event.preventDefault();
- 			m.route("/threadcreate");
- 		},
+ 			m.route("/thread/create");
+ 		}
 	},
   view: function (ctrl) {
     return [Header.view(), (
     	<div class="col-md-12">
     		<div class="col-md-12 panel">
-    			<button type="button" className="btn btn-success pull-right formgroup" onclick={ctrl.forumcreate}>Create new Thread</button>
+    			<button type="button" class="btn btn-success pull-right formgroup" onclick={ctrl.forumcreate}>Create new Thread</button>
     		</div>
         	<div class="list-group col-md-12">
   				<a class="list-group-item" onclick={ctrl.openthread}>Item</a>
