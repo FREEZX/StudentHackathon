@@ -5,119 +5,119 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.controller'),
-	Article = mongoose.model('Article'),
+	PollAnswer = mongoose.model('PollAnswer'),
 	_ = require('lodash');
 
 /**
- * Create a article
+ * Create a pollAnswer
  */
 exports.create = function(spark, message) {
-	var article = new Article(message.data);
-	article.user = spark.request.user;
+	var pollAnswer = new PollAnswer(message.data);
+	pollAnswer.user = spark.request.user;
 
-	article.save(function(err) {
+	pollAnswer.save(function(err) {
 		if (err) {
 			console.log(err);
 			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
-			spark.response(article, message);
+			spark.response(pollAnswer, message);
 		}
 	});
 };
 
 /**
- * Show the current article
+ * Show the current pollAnswer
  */
 exports.read = function(spark, message) {
-	spark.response(spark.request.article, message);
+	spark.response(spark.request.pollAnswer, message);
 };
 
 /**
- * Update a article
+ * Update a pollAnswer
  */
 exports.update = function(spark, message) {
-	var article = spark.request.article;
+	var pollAnswer = spark.request.pollAnswer;
 
-	article = _.extend(article, message.data);
+	pollAnswer = _.extend(pollAnswer, message.data);
 
-	article.save(function(err) {
+	pollAnswer.save(function(err) {
 		if (err) {
 			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
-			spark.response(article, message);
+			spark.response(pollAnswer, message);
 		}
 	});
 };
 
 /**
- * Delete an article
+ * Delete an pollAnswer
  */
 exports.delete = function(spark, message) {
-	var article = spark.request.article;
+	var pollAnswer = spark.request.pollAnswer;
 
-	article.remove(function(err) {
+	pollAnswer.remove(function(err) {
 		if (err) {
 			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
-			spark.response(article, message);
+			spark.response(pollAnswer, message);
 		}
 	});
 };
 
 /**
- * List of Articles
+ * List of PollAnswers
  */
 exports.list = function(spark, message) {
-	Article.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, articles) {
+	PollAnswer.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, pollAnswers) {
 		if (err) {
 			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
-			spark.response(articles, message);
+			spark.response(pollAnswers, message);
 		}
 	});
 };
 
 /**
- * Article middleware
+ * PollAnswer middleware
  */
-exports.articleByID = function(spark, message, id, cb) {
+exports.pollAnswerByID = function(spark, message, id, cb) {
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		var err = {
-			message: 'Article is invalid'
+			message: 'PollAnswer is invalid'
 		};
 		spark.status(400).error(err, message);
 
 		return cb(err);
 	}
 
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
+	PollAnswer.findById(id).populate('user', 'displayName').exec(function(err, pollAnswer) {
 		if (err) return cb(err);
-		if (!article) {
+		if (!pollAnswer) {
 			err = {
-  				message: 'Article not found'
+  				message: 'PollAnswer not found'
   			};
   			console.log(message);
 			return spark.status(404).error(err, message);
 		}
-		spark.request.article = article;
+		spark.request.pollAnswer = pollAnswer;
 		cb();
 	});
 };
 
 /**
- * Article authorization middleware
+ * PollAnswer authorization middleware
  */
 exports.hasAuthorization = function(spark, message) {
 	var cb = arguments[arguments.length-1];
-	if (spark.request.article.user.id !== spark.request.user.id) {
+	if (spark.request.pollAnswer.user.id !== spark.request.user.id) {
 		var err = {
 			message: 'User is not authorized'
 		};
