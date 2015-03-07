@@ -74,12 +74,9 @@ exports.delete = function(spark, message) {
  * List of Polls
  */
 exports.list = function(spark, message) {
-	console.log('asd');
 	Poll.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, polls) {
-		console.log(err);
-		console.log(polls);
 		if (err) {
-			return spark.status(400).response({
+			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {

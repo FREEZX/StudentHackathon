@@ -27,7 +27,8 @@ var ThreadMessage = new Schema({
 	},
 	user: {
 		type: Schema.ObjectId,
-		ref: 'User'
+		ref: 'User',
+		required: true
 	},
 	created: {
 		type: Date,

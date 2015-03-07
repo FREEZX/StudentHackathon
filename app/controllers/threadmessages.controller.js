@@ -73,10 +73,10 @@ exports.delete = function(spark, message) {
 /**
  * List of ThreadMessages
  */
-exports.list = function(spark, message) {
-	ThreadMessage.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, threadMessages) {
+exports.list = function(spark, message, query) {
+	ThreadMessage.find({thread: query.thread}).sort('-created').limit(30).populate('user', 'displayName').exec(function(err, threadMessages) {
 		if (err) {
-			return spark.status(400).response({
+			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
