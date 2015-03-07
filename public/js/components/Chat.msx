@@ -1,0 +1,17 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+var Header = require('./Header');
+
+var Home = {
+  view: function () {
+    return [Header.view(), (
+      <div>
+        
+      </div>
+    )];
+  }
+};
+
+module.exports = Home;

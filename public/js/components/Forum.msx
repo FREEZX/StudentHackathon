@@ -1,0 +1,34 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+var Header = require('./Header');
+var ThreadStore = require('../stores/ThreadStore');
+
+var Home = {
+  controller: function() {
+ 		this.openthread= function(event){
+ 			event.preventDefault();
+ 			m.route("/thread/threadId");
+ 		}
+ 		this.forumcreate= function(event){
+ 			event.preventDefault();
+ 			m.route("/threadcreate");
+ 		},
+	},
+  view: function (ctrl) {
+    return [Header.view(), (
+    	<div class="col-md-12">
+    		<div class="col-md-12 panel">
+    			<button type="button" className="btn btn-success pull-right formgroup" onclick={ctrl.forumcreate}>Create new Thread</button>
+    		</div>
+        	<div class="list-group col-md-12">
+  				<a class="list-group-item" onclick={ctrl.openthread}>Item</a>
+  				<a class="list-group-item" onclick={ctrl.openthread}>Item</a>
+			</div>
+		</div>
+    )];
+  }
+};
+
+module.exports = Home;
