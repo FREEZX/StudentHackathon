@@ -6,33 +6,54 @@ var Header = require('./Header');
 var CommentStore = require('../stores/CommentStore');
 var ThreadStore = require('../stores/ThreadStore');
 var ThreadTitle;
+var threadId;
+var _ = require('lodash');
+
 var Home = {
 	controller: function() {
+    this.vm = {};
+    this.vm.content = m.prop('');
  		this.threadId = m.route.param("threadId");
-    ThreadTitle = ThreadStore.findThreadname(this.threadId);
+    this.insertComment = function(event) {
+      event.preventDefault();
+      var comment = {
+        thread: this.threadId,
+        content: this.vm.content()
+      };
+      this.vm.content('');
+      CommentStore.newComment(comment);
+    };
+    CommentStore.loadComments(this.threadId);
 	},
   view: function (ctrl) {
+    var thread = _.find(ThreadStore.forumthreads, function(thread){return thread._id === ctrl.threadId});
     return [Header.view(), (		
-    <div class="list-group col-md-12">
+    <div class="list-group container">
     
-    <div class="col-md-12">
-    <form class="col-md-offset-3 col-md-6">
+      <div class="col-md-12">
+        <form class="col-md-offset-3 col-md-6" onsubmit={ctrl.insertComment.bind(ctrl)}>
           <div class="form-group">
-              <h2>{ThreadTitle}</h2>
-              {CommentStore.forumthreads.valueOf().map(function (forumthread) {
-                return (
-                <a class="list-group-item">{forumthread.title}</a>   
-                );
+            <h2>{thread.title}</h2>
+            <div class="list-group">
+              {
+                CommentStore.comments.valueOf().map(function (comment) {
+                  return (
+                    <a class="list-group-item">
+                      <h4 class="list-group-item-heading">{comment.user._id}</h4>
+                      <p class="list-group-item-text">{comment.content}</p>
+                    </a>   
+                  );
               })}
+            </div>
           </div>
           
           <div class="form-group">
-            <input type="text" class="form-control" id="newThread" placeholder="Enter Comment"></input>
+            <input type="text" class="form-control" id="newThread" placeholder="Enter Comment" value={ctrl.vm.content()} onchange={m.withAttr("value", ctrl.vm.content)}></input>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button>
-          
-    </form>
-    </div>
+          <input type="submit" class="btn btn-success">Submit</input>
+              
+        </form>
+      </div>
     </div>
 
     )];
