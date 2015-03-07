@@ -10,24 +10,13 @@ var Header = {
     var articleLink;
     var libraryLink;
     var forumLink;
-<<<<<<< HEAD
     var pollsLink;
-    if(AppStore.loggedin()) {
-      loginSpot = <NavLink state={{to: '/logout'}}>Logout</NavLink>;
-      articleLink = <NavLink state={{to: '/articles'}}>Articles</NavLink>;
-      libraryLink = <NavLink state={{to: '/library'}}>Library</NavLink>
-      forumLink = <NavLink state={{to: '/'}}>Forum</NavLink>
-      pollsLink =  <NavLink state={{to: '/polls'}}>Polls</NavLink>
-=======
-    var chatLink;
     var signupLink;
     if(AppStore.loggedin()) {
       loginSpot = <NavLink state={{to: '/logout'}}>Logout</NavLink>;
-      articleLink = <NavLink state={{to: '/articles'}}>Articles</NavLink>;
-      libraryLink = <NavLink state={{to: '/'}}>Home</NavLink>;
+      libraryLink = <NavLink state={{to: '/library'}}>Library</NavLink>
       forumLink = <NavLink state={{to: '/forum'}}>Forum</NavLink>;
-      chatLink = <NavLink state={{to: '/chat'}}>Chat</NavLink>;
->>>>>>> 4f4eb98b0cead5904312ea797066493837ad32b1
+      pollsLink =  <NavLink state={{to: '/polls'}}>Polls</NavLink>;
     } else {
       loginSpot = <NavLink state={{to: '/login'}}>Login</NavLink>;
       signupLink = <NavLink state={{to: '/signup'}}>Sign up</NavLink>;

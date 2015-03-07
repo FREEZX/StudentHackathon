@@ -42,9 +42,8 @@ domready(function() {
       '/signup': Signup,
       '/library': Library,
       '/polls': Polls,
-      '/polls/:pollId': Poll
-      '/library': Library,
-      '/library/:itemId': LibraryItem
+      '/polls/:pollId': Poll,
+      '/library/:itemId': LibraryItem,
       '/forum' : Forum,
       '/chat' : Chat,
       '/thread/:threadId' : Thread,
