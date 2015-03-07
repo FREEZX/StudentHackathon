@@ -15,9 +15,9 @@ var Home = {
 	},
   view: function (ctrl) {
     return [Header.view(), (
-    	<div class="col-md-12">
-    		<div class="col-md-12 panel">
-    			<Link state={{to:'/thread/create'}} class="btn btn-success pull-right formgroup">Create Thread</Link>
+    	<div class="container">
+    		<div class="col-md-12 form-group" style="margin-top:20px;">
+    			<Link state={{to:'/thread/create'}} class="btn btn-success pull-right form-group">Create Thread</Link>
     		</div>
         	<div class="list-group col-md-12">
           {ThreadStore.forumthreads.valueOf().map(function (forumthread) {
