@@ -3,18 +3,36 @@
 /** @jsx m */
 var m = require('mithril.elements');
 var Header = require('./Header');
+var CommentStore = require('../stores/CommentStore');
 
 var Home = {
 	controller: function() {
  		this.threadId = m.route.param("threadId");
 	},
   view: function (ctrl) {
-    return [Header.view(), (
-         <div class="list-group">
-        {ctrl.threadId}
-  			<a class="list-group-item"></a>
-  			<a class="list-group-item"></a>
-		</div>
+    return [Header.view(), (		
+    <div class="list-group col-md-12">
+    
+    <div class="col-md-12">
+    <form class="col-md-offset-3 col-md-6">
+          <div class="form-group">
+              <h2>{ctrl.threadId}</h2>
+              {CommentStore.comments.valueOf().map(function (libItem) {
+                return (
+                <a class="list-group-item">{libItem.comment}</a>   
+                );
+              })}
+          </div>
+          
+          <div class="form-group">
+            <input type="text" class="form-control" id="newThread" placeholder="Enter Comment"></input>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+          
+    </form>
+    </div>
+    </div>
+
     )];
   }
 };

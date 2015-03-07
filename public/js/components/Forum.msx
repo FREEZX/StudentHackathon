@@ -3,7 +3,7 @@
 /** @jsx m */
 var m = require('mithril.elements');
 var Header = require('./Header');
-var ThreadStore = require('../stores/ThreadStore');
+var ThreadStore = require('../stores/ThreadStorage');
 
 var Home = {
   controller: function() {
@@ -19,13 +19,13 @@ var Home = {
     			<Link state={{to:'/thread/create'}} class="btn btn-success pull-right formgroup">Create Thread</Link>
     		</div>
         	<div class="list-group col-md-12">
-           {ThreadStore.data.valueOf().map(function (libItem) {
+          {ThreadStore.threads.valueOf().map(function (libItem) {
             return (
-  				<a class="list-group-item" onclick={ctrl.openthread}>Item</a>
-           );
+  				<a class="list-group-item" onclick={ctrl.openthread}>{libItem.title}</a>   
+            );
           })}
-			</div>
-		</div>
+			    </div>
+		  </div>
     )];
   }
 };
