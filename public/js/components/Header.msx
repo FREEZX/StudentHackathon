@@ -31,7 +31,7 @@ var Header = {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link state={{to: '/'}} className="navbar-brand">☢ NUKE.JS</Link>
+            <Link state={{to: '/'}} className="navbar-brand"><i class="fa fa-graduation-cap"></i></Link>
           </div>
           <nav className="collapse navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav">
