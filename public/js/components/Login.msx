@@ -35,37 +35,39 @@ var SigninForm = {
     return [
       Header.view(),
       <div>
-        <div className="jumbotron">
-          <div className="container">
-            <div className="col-md-offset-4 col-md-4">
-              <div className="panel panel-default">
-                <div className="panel-heading">
-                  <h3 className="panel-title">Sign in</h3>
+        <div class="jumbotron">
+          <div class="container">
+            <div class="col-md-offset-4 col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Sign in</h3>
                 </div>
-                <div className="panel-body">
+                <div class="panel-body">
                   <form role="form" onsubmit={ctrl.signin.bind(ctrl)}>
-                    <div className="form-group">
-                      <div className="input-group">
-                        <div className="input-group-addon"><i className="fa fa-user addon-icon"></i></div>
-                        <input type="text" className="form-control input-lg" name="username" placeholder="Enter username" value={ctrl.vm.username()} onchange={m.withAttr("value", ctrl.vm.username)}></input>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-user addon-icon"></i></div>
+                        <input type="text" class="form-control input-lg" name="username" placeholder="Enter username" value={ctrl.vm.username()} onchange={m.withAttr("value", ctrl.vm.username)}></input>
                       </div>
                     </div>
-                    <div className="form-group">
-                      <div className="input-group">
-                        <div className="input-group-addon"><i className="fa fa-key addon-icon"></i></div>
-                        <input type="password" className="form-control input-lg" name="password" placeholder="Enter password" value={ctrl.vm.password()} onchange={m.withAttr("value", ctrl.vm.password)}></input>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key addon-icon"></i></div>
+                        <input type="password" class="form-control input-lg" name="password" placeholder="Enter password" value={ctrl.vm.password()} onchange={m.withAttr("value", ctrl.vm.password)}></input>
                       </div>
+                      <a>Forgot Password</a>
                     </div>
-                    <div className="form-group">
-                      <input type="submit" className="btn btn-success" value="Sign in"></input>
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-success" value="Sign in"></input>
                     </div>
-                    <div className={ctrl.vm.success() ? 'alert alert-success' : ''} role="alert">{ctrl.vm.success()}</div>
-                    <div className={ctrl.vm.error() ? 'alert alert-danger' : ''} role="alert">{ctrl.vm.error()}</div>
+                    <a>Sign Up</a>
+                    <div class={ctrl.vm.success() ? 'alert alert-success' : ''} role="alert">{ctrl.vm.success()}</div>
+                    <div class={ctrl.vm.error() ? 'alert alert-danger' : ''} role="alert">{ctrl.vm.error()}</div>
                   </form>
                 </div>
               </div>
             </div>
-            <div className="col-md-offset-4 col-md-4 well">
+            <div class="col-md-offset-4 col-md-4 well">
               You can login with username: "demo" and password: "demo123"
             </div>
           </div>
