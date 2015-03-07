@@ -19,9 +19,9 @@ var Home = {
     <form class="col-md-offset-3 col-md-6">
           <div class="form-group">
               <h2>{ThreadTitle}</h2>
-              {CommentStore.comments.valueOf().map(function (libItem) {
+              {CommentStore.forumthreads.valueOf().map(function (forumthread) {
                 return (
-                <a class="list-group-item">{libItem.comment}</a>   
+                <a class="list-group-item">{forumthread.title}</a>   
                 );
               })}
           </div>
