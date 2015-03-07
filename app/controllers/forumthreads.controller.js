@@ -6,6 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.controller'),
 	ForumThread = mongoose.model('ForumThread'),
+	ThreadMessage = mongoose.model('ThreadMessage'),
+
 	_ = require('lodash');
 
 /**
@@ -34,8 +36,22 @@ exports.create = function(spark, message) {
 /**
  * Show the current forumThread
  */
-exports.read = function(spark, message) {
-	spark.response(spark.request.forumThread, message);
+exports.read = function(spark, message, id) {
+
+	var data = {
+		thread: id
+	};
+
+	ThreadMessage.find(data).sort('-created').limit(30).populate('user', 'displayName').exec(function(err, threadMessages) {
+		if (err) {
+			console.log(err);
+			return spark.status(400).error({
+				message: errorHandler.getErrorMessage(err)
+			}, message);
+		} else {
+			spark.response(threadMessages, message);
+		}
+	});
 };
 
 /**
