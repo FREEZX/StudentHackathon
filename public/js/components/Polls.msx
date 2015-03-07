@@ -2,7 +2,7 @@
 
 var m = require('mithril.elements');
 var Header = require('./Header');
-var AppStore = require('../stores/AppStore');
+var PollStore = require('../stores/PollStore');
 
 var Polls = {
   view: function (ctrl) {
@@ -11,10 +11,14 @@ var Polls = {
       <div class="container">
       <h3>My Polls</h3>
         <div class="list-group">
-          <Link state={{to: '/polls/123'}} class="list-group-item">
-            <h4 class="list-group-item-heading">Poll 1</h4>
-            <p class="list-group-item-text">...</p>
-          </Link>
+          {PollStore.polls.valueOf().map(function (poll) {
+            return (
+              <Link state={{to: '/polls/'+poll._id}} class="list-group-item">
+                <h4 class="list-group-item-heading">{poll.title}</h4>
+                <p class="list-group-item-text">{poll.description}</p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     ];
