@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 var AppStore = {
   loggedin: m.prop(false),
-  articles: Array
+  articles: Array,
 };
 
 AppStore.getLoggedUser = function(){
@@ -15,6 +15,14 @@ AppStore.getLoggedUser = function(){
   });
 };
 
+AppStore.newArticle = function(article){
+  m.startComputation();
+  primus.request('/article/create', article).then(function(data){
+    data.user = AppStore.loggedin();
+    AppStore.articles.unshift(data);
+    m.endComputation();
+  });
+};
 AppStore.loadArticles = function(){
   m.startComputation();
   primus.request('/article/list').then(function(data){
@@ -31,15 +39,6 @@ AppStore.deleteArticle = function(id){
         return true;
       }
     });
-    m.endComputation();
-  });
-};
-
-AppStore.newArticle = function(article){
-  m.startComputation();
-  primus.request('/article/create', article).then(function(data){
-    data.user = AppStore.loggedin();
-    AppStore.articles.unshift(data);
     m.endComputation();
   });
 };
