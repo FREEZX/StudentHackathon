@@ -7,12 +7,18 @@ var PollStore = require('../stores/PollStore');
 
 var Polls = {
   controller: function(){
-  	console.log(m.route.param('pollId'));
+  	this.pollId = m.route.param('pollId');
   	this.type = 'checkbox';
+  	var self = this;
+  	this.addAnswer = function() {
+  		primus.request('/pollanswers/create', {poll: self.pollId, answers: ['Odgovor1', 'Odgovor2']} ).then(function(answer){
+  			console.log(answer);
+  		});
+  	};
   },
+
   view: function (ctrl) {
-  	var pollId = m.route.param('pollId');
-  	ctrl.poll = _.find(PollStore.polls, function(poll){  return poll._id === pollId })
+  	ctrl.poll = _.find(PollStore.polls, function(poll){  return poll._id === ctrl.pollId })
   	console.log(ctrl.poll);
     return [
       	Header.view(),
@@ -41,7 +47,7 @@ var Polls = {
                     </ul>
                 </div>
                 <div class="panel-footer text-center">
-                    <button type="button" class="btn btn-primary btn-block btn-sm">
+                    <button type="button" class="btn btn-primary btn-block btn-sm" onclick={ctrl.addAnswer.bind(ctrl)}>
                         Vote</button>
                 </div>	
             </div>
