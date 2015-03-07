@@ -47,7 +47,6 @@ domready(function() {
       '/forum' : Forum,
       '/chat' : Chat,
       '/thread/create' : ThreadCreate,
-      '/thread/:threadId' : Thread,
-      '/library': Library
+      '/thread/:threadId' : Thread
     });
 });
