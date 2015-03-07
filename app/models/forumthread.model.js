@@ -18,6 +18,7 @@ var ForumThread = new Schema({
 	},
 	comments_count: {
 		type: Number,
+		default: 0,
 		required: true
 	},
 	user: {

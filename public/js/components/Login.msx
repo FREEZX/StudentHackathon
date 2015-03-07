@@ -21,7 +21,7 @@ var SigninForm = {
         self.vm.success('Successfully logged in user ' + data.displayName);
         AppStore.loggedin(data);
         m.endComputation();
-        m.route('/articles');
+        m.route('/#');
       })
       .fail(function(error){
         self.vm.error('Login failed with error: ' + error.message);
@@ -55,7 +55,7 @@ var SigninForm = {
                         <div class="input-group-addon"><i class="fa fa-key addon-icon"></i></div>
                         <input type="password" class="form-control input-lg" name="password" placeholder="Enter password" value={ctrl.vm.password()} onchange={m.withAttr("value", ctrl.vm.password)}></input>
                       </div>
-                      <a>Forgot Password</a>
+                    <a href="#" className="pull-right">Forgot Password</a>  
                     </div>
                     <div class="form-group">
                       <input type="submit" class="btn btn-success" value="Sign in"></input>

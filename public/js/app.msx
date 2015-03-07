@@ -21,6 +21,8 @@ var Articles = require('./components/Articles');
 var Login = require('./components/Login');
 var Logout = require('./components/Logout');
 var Signup = require('./components/Signup');
+var Library = require('./components/Library');
+
 
 m.route.mode = 'hash';
 
@@ -32,6 +34,7 @@ domready(function() {
       '/articles': Articles,
       '/login': Login,
       '/logout': Logout,
-      '/signup': Signup
+      '/signup': Signup,
+      '/library': Library
     });
 });

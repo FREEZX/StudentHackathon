@@ -1,0 +1,27 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+var Header = require('./Header');
+
+var Home = {
+  view: function () {
+    return [Header.view(), (
+
+          <div className="col-md-12">
+            <div className="col-md-4">
+              <div className="thumbnail">
+                <img src="img/logo.png" />
+                <div className="caption">
+                  <h3>Thumbnail label</h3>
+                  <p></p>
+                  <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#" className="btn btn-default" role="button">Button</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+    )];
+  }
+};
+
+module.exports = Home;
