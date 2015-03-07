@@ -2,33 +2,42 @@
 
 var m = require('mithril.elements');
 var Header = require('./Header');
-var AppStore = require('../stores/AppStore');
+var _ = require('lodash');
+var PollStore = require('../stores/PollStore');
 
 var Polls = {
   controller: function(){
+  	console.log(m.route.param('pollId'));
   	this.type = 'checkbox';
   },
   view: function (ctrl) {
+  	var pollId = m.route.param('pollId');
+  	ctrl.poll = _.find(PollStore.polls, function(poll){  return poll._id === pollId })
+  	console.log(ctrl.poll);
     return [
-      Header.view(),
-      <div class="container" style="margin-top:20px;">
-     	<div class="panel panel-primary">
+      	Header.view(),
+      	<div class="container" style="margin-top:20px;">
+     		<div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <span class="glyphicon glyphicon-hand-right"></span>
-                        Where to go in May?
+                        {ctrl.poll.title}
                     </h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <div class="checkbox">
-                                <label>
-                                    <input type={ctrl.type} value=""></input>
-                                    Internet
-                                </label>
-                            </div>
-                        </li>
+                    	{ctrl.polls.valueOf().answers.map(function(answer){
+                    		return (
+		                        <li class="list-group-item">
+		                            <div class="checkbox">
+		                                <label>
+		                                    <input type={ctrl.poll.type === 'single' ? 'radio' : 'checkbox'} name="poll-answer" value=""></input>
+		                                    {answer}
+		                                </label>
+		                            </div>
+		                        </li>
+	                        );
+                    	})}
                     </ul>
                 </div>
                 <div class="panel-footer text-center">

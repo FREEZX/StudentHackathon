@@ -42,7 +42,7 @@ domready(function() {
       '/signup': Signup,
       '/library': Library,
       '/polls': Polls,
-      '/polls/:pollId': Poll,
+      '/poll/:pollId': Poll,
       '/library/:itemId': LibraryItem,
       '/forum' : Forum,
       '/chat' : Chat,
