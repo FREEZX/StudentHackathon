@@ -8,9 +8,15 @@ var Header = {
   view: function() {
     var loginSpot;
     var articleLink;
+    var libraryLink;
+    var forumLink;
+    var chatLink;
     if(AppStore.loggedin()) {
       loginSpot = <NavLink state={{to: '/logout'}}>Logout</NavLink>;
       articleLink = <NavLink state={{to: '/articles'}}>Articles</NavLink>;
+      libraryLink = <NavLink state={{to: '/library'}}>Library</NavLink>
+      forumLink = <NavLink state={{to: '/'}}>Forum</NavLink>
+      chatLink =  <NavLink state={{to: '/'}}>Chat</NavLink>
     } else {
       loginSpot = <NavLink state={{to: '/login'}}>Login</NavLink>;
     }
@@ -28,14 +34,13 @@ var Header = {
           </div>
           <nav className="collapse navbar-collapse bs-navbar-collapse">
             <ul className="nav navbar-nav">
-              <NavLink state={{to: '/'}}>Home</NavLink>
-              <NavLink state={{to: '/benchmarks'}}>Benchmarks</NavLink>
-              <NavLink state={{href: 'https://github.com/FREEZX/nuke.js'}}>Docs</NavLink>
-              {articleLink}
+              {libraryLink}
+              {forumLink}
+              {chatLink}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {loginSpot}
-              <NavLink state={{to: '/signup'}}>Sign up</NavLink>
+              <NavLink state={{to: '/signup'}}>Sign Up</NavLink>
             </ul>
           </nav>
         </div>
