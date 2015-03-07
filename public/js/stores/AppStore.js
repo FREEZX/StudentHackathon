@@ -17,7 +17,7 @@ AppStore.getLoggedUser = function(){
 
 AppStore.newArticle = function(article){
   m.startComputation();
-  primus.request('/article/create', article).then(function(data){
+  primus.request('/articles/create', article).then(function(data){
     data.user = AppStore.loggedin();
     AppStore.articles.unshift(data);
     m.endComputation();
@@ -25,7 +25,7 @@ AppStore.newArticle = function(article){
 };
 AppStore.loadArticles = function(){
   m.startComputation();
-  primus.request('/article/list').then(function(data){
+  primus.request('/articles/list').then(function(data){
     AppStore.articles = data; 
     m.endComputation();
   });
@@ -33,7 +33,7 @@ AppStore.loadArticles = function(){
 
 AppStore.deleteArticle = function(id){
   m.startComputation();
-  primus.request('/article/delete/'+id).then(function(data){
+  primus.request('/articles/delete/'+id).then(function(data){
     AppStore.articles = _.remove(AppStore.articles, function(article){
       if(article._id !== id){
         return true;
