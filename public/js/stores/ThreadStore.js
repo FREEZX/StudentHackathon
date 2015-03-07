@@ -13,6 +13,7 @@ ThreadStore.newThread = function(forumthread){
 		data.user = ThreadStore.loggedin();
 		ThreadStore.forumthreads.unshift(data);
 		m.endComputation();
+		m.route('/forum');
 	});
 };
 

@@ -10,21 +10,20 @@ var Home = {
  		this.openthread= function(event){
  			event.preventDefault();
  			m.route("/thread/threadId");
- 		},
- 		this.forumcreate= function(event){
- 			event.preventDefault();
- 			m.route("/thread/create");
  		}
 	},
   view: function (ctrl) {
     return [Header.view(), (
     	<div class="col-md-12">
     		<div class="col-md-12 panel">
-    			<button type="button" class="btn btn-success pull-right formgroup" onclick={ctrl.forumcreate}>Create new Thread</button>
+    			<Link state={{to:'/thread/create'}} class="btn btn-success pull-right formgroup">Create Thread</Link>
     		</div>
         	<div class="list-group col-md-12">
+           {ThreadStore.data.valueOf().map(function (libItem) {
+            return (
   				<a class="list-group-item" onclick={ctrl.openthread}>Item</a>
-  				<a class="list-group-item" onclick={ctrl.openthread}>Item</a>
+           );
+          })}
 			</div>
 		</div>
     )];

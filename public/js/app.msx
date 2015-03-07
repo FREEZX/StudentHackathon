@@ -46,7 +46,8 @@ domready(function() {
       '/library/:itemId': LibraryItem,
       '/forum' : Forum,
       '/chat' : Chat,
+      '/thread/create' : ThreadCreate,
       '/thread/:threadId' : Thread,
-      '/threadcreate' : ThreadCreate
+      '/library': Library
     });
 });
