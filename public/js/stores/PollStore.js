@@ -17,8 +17,8 @@ var PollStore = {
 };*/
 
 PollStore.loadPolls = function(){
+	m.startComputation();
 	primus.request('/polls/list').then(function(data){
-		m.startComputation();
 		PollStore.polls = data; 
 		m.endComputation();
 	});
