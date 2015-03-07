@@ -38,15 +38,11 @@ domready(function() {
       '/login': Login,
       '/logout': Logout,
       '/signup': Signup,
-<<<<<<< HEAD
       '/library': Library,
-      '/library/:itemId': LibraryItem
-=======
+      '/library/:itemId': LibraryItem,
       '/forum' : Forum,
       '/chat' : Chat,
       '/thread/:threadId' : Thread,
       '/threadcreate' : ThreadCreate
-      '/library': Library
->>>>>>> d73b29e13a069180280086d998d8b5d4b92804f6
     });
 });
