@@ -1,0 +1,44 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+var Header = require('./Header');
+var LibraryStorage = require('../stores/LibraryStorage');
+
+var Home = {
+  view: function () {
+    return [Header.view(), (
+        <div className="container" style="margin-top:20px;">
+          {LibraryStorage.libraryStorage.valueOf().map(function (libItem) {
+            var icon;
+            var buttonLink;
+            if(libItem.file == 'true')
+            {
+              icon = <i className="fa fa-file-pdf-o fa-4x"/>;
+              buttonLink = <p><Link state={{to: '/library/'+libItem._id}} className="btn btn-primary btn-block" role="button">Отвори</Link></p>;
+            }
+            else {
+              icon = <i className="fa fa-folder fa-4x"/>;
+              buttonLink = <p><Link state={{to: '/library/'+libItem._id}} className="btn btn-primary btn-block" role="button">Отвори</Link></p>;
+            }
+            return (
+              <div className="col-md-2">
+                <div className="thumbnail" style="height:170px;">
+                  <div class="text-center">
+                    {icon}
+                  </div>
+                  <div className="caption">
+                    <h4 className="text-center" style="height:35px;">{libItem.name}</h4>
+                    <p></p>
+                    {buttonLink}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+    )];
+  }
+};
+
+module.exports = Home;
