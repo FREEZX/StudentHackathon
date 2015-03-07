@@ -4,10 +4,12 @@
 var m = require('mithril.elements');
 var Header = require('./Header');
 var CommentStore = require('../stores/CommentStore');
-
+var ThreadStore = require('../stores/ThreadStore');
+var ThreadTitle;
 var Home = {
 	controller: function() {
  		this.threadId = m.route.param("threadId");
+    ThreadTitle = ThreadStore.findThreadname(this.threadId);
 	},
   view: function (ctrl) {
     return [Header.view(), (		
@@ -16,7 +18,7 @@ var Home = {
     <div class="col-md-12">
     <form class="col-md-offset-3 col-md-6">
           <div class="form-group">
-              <h2>{ctrl.threadId}</h2>
+              <h2>{ThreadTitle}</h2>
               {CommentStore.comments.valueOf().map(function (libItem) {
                 return (
                 <a class="list-group-item">{libItem.comment}</a>   

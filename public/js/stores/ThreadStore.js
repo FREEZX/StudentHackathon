@@ -37,6 +37,16 @@ ThreadStore.deleteThread = function(id){
 	});
 };
 
+ThreadStore.findThreadname = function(id) {
+	var forumthreads = ThreadStore.forumthreads;
+	for(var i=0;i<forumthreads.length;i++){
+		if(forumthreads[i]._id==id){
+			return forumthreads[i].title;
+		}
+	}
+
+};
+
 
 ThreadStore.loadThreads();
 

@@ -3,13 +3,14 @@
 /** @jsx m */
 var m = require('mithril.elements');
 var Header = require('./Header');
-var ThreadStore = require('../stores/ThreadStorage');
+//var ThreadStorage = require('../stores/ThreadStorage');
+var ThreadStore = require('../stores/ThreadStore');
 
 var Home = {
   controller: function() {
  		this.openthread= function(event){
  			event.preventDefault();
- 			m.route("/thread/threadId");
+ 			m.route("/thread/"+ctrl.id);
  		}
 	},
   view: function (ctrl) {
@@ -19,9 +20,9 @@ var Home = {
     			<Link state={{to:'/thread/create'}} class="btn btn-success pull-right formgroup">Create Thread</Link>
     		</div>
         	<div class="list-group col-md-12">
-          {ThreadStore.threads.valueOf().map(function (libItem) {
+          {ThreadStore.forumthreads.valueOf().map(function (forumthread) {
             return (
-  				<a class="list-group-item" onclick={ctrl.openthread}>{libItem.title}</a>   
+  				<Link class="list-group-item" state={{to: '/thread/'+forumthread._id}}>{forumthread.title}</Link>   
             );
           })}
 			    </div>
