@@ -24,6 +24,7 @@ var Forum = require('./components/Forum');
 var Chat = require('./components/Chat');
 var Thread = require('./components/Thread');
 var ThreadCreate = require('./components/ThreadCreate');
+var Library = require('./components/Library');
 
 m.route.mode = 'hash';
 
@@ -40,5 +41,6 @@ domready(function() {
       '/chat' : Chat,
       '/thread/:threadId' : Thread,
       '/threadcreate' : ThreadCreate
+      '/library': Library
     });
 });
