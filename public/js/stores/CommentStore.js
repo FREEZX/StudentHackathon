@@ -2,31 +2,52 @@
 var m = require('mithril.elements');
 var _ = require('lodash');
 
-var CommentStore = {
-  loggedin: m.prop(false),
-  comments: []
+var ThreadStore = {
+	loggedin: m.prop(false),
+	forumthreads: Array
 };
 
-CommentStore.loadLibrary = function(){
-  m.startComputation();
-  // primus.request('/article/list').then(function(data){
-  //   LibraryStore.articles = data; 
-  //   m.endComputation();
-  // });
-  CommentStore.comments = [
-    {
-      _id: '0',
-      comment: 'Comment1'
-    },
-    {
-      _id: '1',
-      comment: 'Comment2'
-    }
-  ];
-
-  m.endComputation();
+ThreadStore.newThread = function(forumthread){
+	m.startComputation();
+	primus.request('/forumthreads/create', forumthread).then(function(data){
+		data.user = ThreadStore.loggedin();
+		ThreadStore.forumthreads.unshift(data);
+		m.endComputation();
+		m.route('/forum');
+	});
 };
 
-CommentStore.loadLibrary();
+ThreadStore.loadThreads = function(){
+	m.startComputation();
+	primus.request('/forumthreads/list').then(function(data){
+		ThreadStore.forumthreads = data; 
+		m.endComputation();
+	});
+};
 
-module.exports = CommentStore;
+ThreadStore.deleteThread = function(id){
+	m.startComputation();
+	primus.request('/forumthreads/delete/'+id).then(function(data){
+		ThreadStore.forumthreads = _.remove(ThreadStore.forumthreads, function(forumthread){
+			if(forumthread._id !== id){
+				return true;
+			}
+		});
+		m.endComputation();
+	});
+};
+
+ThreadStore.findThreadname = function(id) {
+	var forumthreads = ThreadStore.forumthreads;
+	for(var i=0;i<forumthreads.length;i++){
+		if(forumthreads[i]._id===id){
+			return forumthreads[i].title;
+		}
+	}
+
+};
+
+
+ThreadStore.loadThreads();
+
+module.exports = ThreadStore;
