@@ -17,7 +17,7 @@ public/lib/
 
 # MEAN.js app and assets
 # ======================
-public/js/bundle.js
+bundle.js
 config/sslcerts/*.pem
 access.log
 .env
