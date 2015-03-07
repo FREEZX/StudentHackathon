@@ -25,7 +25,11 @@ var Home = {
             return (
   				      <Link class="list-group-item" state={{to: '/thread/'+forumthread._id}}>
                 <span class="badge">{forumthread.comments_count}</span>
-                {forumthread.title}
+                <strong>{forumthread.title}</strong>
+                <div>
+                <h6 class="text-muted">Created on: {forumthread.created}</h6>
+                </div>
+
                 </Link>
                 
                 
