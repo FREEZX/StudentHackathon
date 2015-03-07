@@ -22,7 +22,8 @@ var Login = require('./components/Login');
 var Logout = require('./components/Logout');
 var Signup = require('./components/Signup');
 var Library = require('./components/Library');
-
+var Polls = require('./components/Polls');
+var Poll = require('./components/Poll');
 
 m.route.mode = 'hash';
 
@@ -35,6 +36,8 @@ domready(function() {
       '/login': Login,
       '/logout': Logout,
       '/signup': Signup,
-      '/library': Library
+      '/library': Library,
+      '/polls': Polls,
+      '/polls/:pollId': Poll
     });
 });

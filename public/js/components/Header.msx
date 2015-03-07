@@ -10,13 +10,13 @@ var Header = {
     var articleLink;
     var libraryLink;
     var forumLink;
-    var chatLink;
+    var pollsLink;
     if(AppStore.loggedin()) {
       loginSpot = <NavLink state={{to: '/logout'}}>Logout</NavLink>;
       articleLink = <NavLink state={{to: '/articles'}}>Articles</NavLink>;
       libraryLink = <NavLink state={{to: '/library'}}>Library</NavLink>
       forumLink = <NavLink state={{to: '/'}}>Forum</NavLink>
-      chatLink =  <NavLink state={{to: '/'}}>Chat</NavLink>
+      pollsLink =  <NavLink state={{to: '/polls'}}>Polls</NavLink>
     } else {
       loginSpot = <NavLink state={{to: '/login'}}>Login</NavLink>;
     }
@@ -36,7 +36,7 @@ var Header = {
             <ul className="nav navbar-nav">
               {libraryLink}
               {forumLink}
-              {chatLink}
+              {pollsLink}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               {loginSpot}
