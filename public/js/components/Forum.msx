@@ -21,8 +21,14 @@ var Home = {
     		</div>
         	<div class="list-group col-md-12">
           {ThreadStore.forumthreads.valueOf().map(function (forumthread) {
+            console.log(forumthread);
             return (
-  				<Link class="list-group-item" state={{to: '/thread/'+forumthread._id}}>{forumthread.title}</Link>   
+  				      <Link class="list-group-item" state={{to: '/thread/'+forumthread._id}}>
+                <span class="badge">{forumthread.comments_count}</span>
+                {forumthread.title}
+                </Link>
+                
+                
             );
           })}
 			    </div>
