@@ -3,10 +3,12 @@
 /** @jsx m */
 var m = require('mithril.elements');
 var Header = require('./Header');
+var LibraryStore = require('../stores/LibraryStore');
 
 var Home = {
   view: function () {
     return [Header.view(), (
+<<<<<<< HEAD
 
           <div className="container">
             <div className="col-md-4">
@@ -35,10 +37,26 @@ var Home = {
                   <h3>Thumbnail label</h3>
                   <p></p>
                   <p><a href="#" className="btn btn-primary" role="button">Button</a> <a href="#" className="btn btn-default" role="button">Button</a></p>
+=======
+        <div className="container" style="margin-top:20px;">
+          {LibraryStore.library.valueOf().map(function (libItem) {
+            return (
+              <div className="col-md-2">
+                <div className="thumbnail" style="height:170px;">
+                  <div class="text-center">
+                    <i className="fa fa-book fa-4x"/>
+                  </div>
+                  <div className="caption">
+                    <h4 className="text-center" style="height:35px;">{libItem.name}</h4>
+                    <p></p>
+                    <p><Link state={{to: '/library/'+libItem._id}} className="btn btn-primary btn-block" role="button">Види курс</Link></p>
+                  </div>
+>>>>>>> 4f4eb98b0cead5904312ea797066493837ad32b1
                 </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
+        </div>
     )];
   }
 };

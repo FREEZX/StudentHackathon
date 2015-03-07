@@ -1,0 +1,22 @@
+'use strict';
+
+/** @jsx m */
+var m = require('mithril.elements');
+var Header = require('./Header');
+
+var Home = {
+	controller: function() {
+ 		this.threadId = m.route.param("threadId");
+	},
+  view: function (ctrl) {
+    return [Header.view(), (
+         <div class="list-group">
+        {ctrl.threadId}
+  			<a class="list-group-item"></a>
+  			<a class="list-group-item"></a>
+		</div>
+    )];
+  }
+};
+
+module.exports = Home;
