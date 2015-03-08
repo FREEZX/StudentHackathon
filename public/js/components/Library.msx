@@ -4,6 +4,7 @@
 var m = require('mithril.elements');
 var Header = require('./Header');
 var LibraryStore = require('../stores/LibraryStore');
+var LibraryStore2 = require('../stores/LibraryStore2');
 
 
 var Library = {
@@ -16,8 +17,9 @@ var Library = {
       console.log(document.getElementById('inputId'));
       if(fileToUpload!=''){
         this.vm.file_id = (new Date()).getTime();
-        this.vm.filePath = document.getElementById('inputId').value;
-       (new S3Upload({s3_object_name: this.vm.file_id})).uploadFile(fileToUpload);
+        this.vm.name = fileToUpload.name;
+        (new S3Upload({s3_object_name: this.vm.file_id})).uploadFile(fileToUpload);
+        LibraryStore2.newLibrary(this.vm)
       }
     }
   },
@@ -29,8 +31,12 @@ var Library = {
            <input type="file" id="inputId" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" onchange={ctrl.uploadFile.bind(ctrl)}/>
            <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
         </div>
+        <div style="position:relative">
+           <input type="file" id="inputId" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" onchange={ctrl.uploadFile.bind(ctrl)}/>
+           <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
+        </div>
         <div style="margin-top:5%">
-          {LibraryStore.library.valueOf().map(function (libItem) {
+          {LibraryStore2.library.valueOf().map(function (libItem) {
             return (
               <div className="col-md-2">
                 <div className="thumbnail" style="height:170px;">
