@@ -12,7 +12,7 @@ var Home = {
 		if(!this.chatinited){
 			this.vm = {};
 			this.vm.message = m.prop('');
-			chatinited = true;
+			this.chatinited = true;
 		}
 
 		this.sendMessage = function(event){
@@ -23,7 +23,6 @@ var Home = {
 		}
 	},
   view: function (ctrl) {
-  	console.log(ctrl);
     return [Header.view(), (
       <div class="container" style="margin-top:20px;">
       	<div>
