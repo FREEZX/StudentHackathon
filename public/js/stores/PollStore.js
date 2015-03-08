@@ -4,7 +4,8 @@ var _ = require('lodash');
 
 var PollStore = {
 	loggedin: m.prop(false),
-	polls: []
+	polls: [],
+	pollData: {}
 };
 
 /*PollStore.newThread = function(forumthread){
@@ -20,6 +21,14 @@ PollStore.loadPolls = function(){
 	m.startComputation();
 	primus.request('/polls/list').then(function(data){
 		PollStore.polls = data; 
+		m.endComputation();
+	});
+};
+
+PollStore.loadPollData = function(pollId){
+	m.startComputation();
+	primus.request('/polls/'+pollId).then(function(data){
+		PollStore.pollData = data; 
 		m.endComputation();
 	});
 };
