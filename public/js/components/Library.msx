@@ -6,9 +6,22 @@ var Header = require('./Header');
 var LibraryStore = require('../stores/LibraryStore');
 
 var Home = {
+  controller: function(){
+    this.dropFile = function(event){
+      event.preventDefault();
+      var container = document.getElementById('drop');
+      console.log('test');
+    }
+  },
+
   view: function () {
     return [Header.view(), (
-        <div className="container" style="margin-top:20px;">
+      <div class="">
+      <div style="position:relative">
+        <input type="file" syle="position: absolute; z-index: 1; opacity: 0; visibility:hidden; display:block"></input>
+        <button class="btn btn-primary" style="position: absolute; top: 0px;left: 0px; z-index: -1; width: 90px;">Browse</button>
+      </div>
+        <div id="drop" className="container" style="margin-top:20px;">
           {LibraryStore.library.valueOf().map(function (libItem) {
             return (
               <div className="col-md-2">
@@ -24,10 +37,12 @@ var Home = {
                 </div>
               </div>
             );
-          })}
+
+          })
+       }
         </div>
-    )];
-  }
+      </div>
+    )];}
 };
 
 module.exports = Home;
