@@ -6,7 +6,7 @@
 
     S3Upload.prototype.s3_sign_put_url = '/s3/sign';
 
-    S3Upload.prototype.file_dom_selector = 'file_upload';
+    S3Upload.prototype.file_dom_selector = 'inputId';
 
     S3Upload.prototype.onFinishS3Put = function(public_url) {
       return console.log('base.onFinishS3Put()', public_url);
@@ -25,7 +25,7 @@
       for (option in options) {
         this[option] = options[option];
       }
-      this.handleFileSelect(document.getElementById(this.file_dom_selector));
+      // this.handleFileSelect(document.getElementById(this.file_dom_selector));
     }
 
     S3Upload.prototype.handleFileSelect = function(file_element) {
@@ -57,12 +57,11 @@
 
     S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
       var this_s3upload;
+      console.log('pak vlagaaa');
       this_s3upload = this;
-      var d = new Date();
-      var n = d.toISOString();
-      primus.request(this.s3_sign_put_url+'?s3_object_type='+file.type+'&s3_object_name=' + this.s3_object_name+n)
+      primus.request(this.s3_sign_put_url+'?s3_object_type='+file.type+'&s3_object_name=' + this.s3_object_name)
       .then(function(data){
-          return callback(data.result.signed_request, data.result.url);
+          return callback(data.signed_request, data.url);
       }).fail(function(error){
           this_s3upload.onError('Signing server returned some ugly/empty JSON: "' + this.error.message + '"');
           return false;
@@ -103,6 +102,7 @@
     S3Upload.prototype.uploadFile = function(file) {
       var this_s3upload;
       this_s3upload = this;
+      console.log('vlagaaa');
       return this.executeOnSignedUrl(file, function(signedURL, publicURL) {
         return this_s3upload.uploadToS3(file, signedURL, publicURL);
       });

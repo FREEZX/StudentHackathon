@@ -16,9 +16,13 @@ var FileSchema = new Schema({
 		trim: true,
 		required: 'Name cannot be blank'
 	},
+	file_id: {
+		type: String
+	},
 	type: {
 		type: String,
 		enum: ['folder', 'file'],
+		default: 'file',
 		required: true
 	},
 	parent: {

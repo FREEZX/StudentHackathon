@@ -9,7 +9,7 @@ var LibraryStore = {
 
 LibraryStore.newLibrary= function(library){
 	m.startComputation();
-	primus.request('/lybrary/create', library).then(function(data){
+	primus.request('/files/create', library).then(function(data){
 		data.user = LibraryStore.loggedin();
 		LibraryStore.library.push(data);
 		m.endComputation();
@@ -18,7 +18,7 @@ LibraryStore.newLibrary= function(library){
 
 LibraryStore.loadLibrary = function(){
 	m.startComputation();
-	primus.request('/library/').then(function(data){
+	primus.request('/files/list').then(function(data){
 		LibraryStore.library = data; 
 		m.endComputation();
 	});

@@ -4,23 +4,31 @@
 var m = require('mithril.elements');
 var Header = require('./Header');
 var LibraryStore = require('../stores/LibraryStore');
+var LibraryStore2 = require('../stores/LibraryStore2');
+
 
 var Library = {
   controller: function() {
-    this.dropFile = function(event) {
-
-    //   function cancel(e) {
-    //   if (e.preventDefault) { e.preventDefault(); }
-    //   return false;
-    // }
+    this.vm = {};
+    this.uploadFile = function(event) {
       event.preventDefault();
       var container = document.getElementById('drop');
-      console.log("test");
-      container.addEventListener('drop',onDrop,true)
+      var fileToUpload= document.getElementById('inputId').files[0];
+      console.log(document.getElementById('inputId'));
+      if(fileToUpload!=''){
+        this.vm.file_id = (new Date()).getTime();
+        this.vm.name = fileToUpload.name;
+        (new S3Upload({s3_object_name: this.vm.file_id})).uploadFile(fileToUpload);
+        LibraryStore2.newLibrary(this.vm)
+      }
     }
 
     this.uploadFile = function(event){
         console.log('test');
+    }
+
+    this.open = function(event){
+
     }
   },
   view: function (ctrl) {
@@ -29,23 +37,40 @@ var Library = {
         <div className="container" id="drop" style="margin-top:20px;">
         <input id="inputId" type="file" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" />
         <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
+        <div style="position:relative">
+           <input type="file" id="inputId" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" onchange={ctrl.uploadFile.bind(ctrl)}/>
+           <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
+        </div>
+        <div style="position:relative">
+           <input type="file" id="inputId" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" onchange={ctrl.uploadFile.bind(ctrl)}/>
+           <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
+        </div>
         <div style="margin-top:5%">
-          {LibraryStore.library.valueOf().map(function (libItem) {
+          {LibraryStore2.library.valueOf().map(function (libItem) {
+            var linkThing;
+            if(libItem.type === 'file'){
+              linkThing = <a href={'//mofhackathon2.s3.amazonaws.com/'+libItem.file_id} class="btn btn-primary" target="_blank">Download</a>
+            }
+            else{
+              linkThing = <Link state={{to: '/library/'+libItem._id}} class="btn btn-primary">Open</Link>
+            }
             return (
-              <div className="col-md-2">
-                <div className="thumbnail" style="height:170px;">
+              <div key={libItem._id} className="col-md-2 filetile">
+                <div className="thumbnail" onclick={ctrl.open} style="height:170px;">
                   <div class="text-center">
                     <i className="fa fa-book fa-4x"/>
                   </div>
                   <div className="caption">
                     <h4 className="text-center" style="height:35px;">{libItem.name}</h4>
                     <p></p>
-                    <p><Link state={{to: '/library/'+libItem._id}} className="btn btn-primary btn-block" role="button">Види курс</Link></p>
+                    <p className="text-center">{linkThing}</p>
                   </div>
                 </div>
               </div>
             );
-          })}
+
+          })
+       }
         </div>
         </div>
     )];
