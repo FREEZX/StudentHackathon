@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 var ThreadStore = {
 	loggedin: m.prop(false),
-	forumthreads: Array
+	forumthreads: []
 };
 
 ThreadStore.newThread = function(forumthread){

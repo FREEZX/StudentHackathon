@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.controller'),
 	ThreadMessage = mongoose.model('ThreadMessage'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	random_name = require('node-random-name');
 
 /**
  * Create a threadMessage
@@ -80,6 +81,9 @@ exports.list = function(spark, message, query) {
 				message: errorHandler.getErrorMessage(err)
 			}, message);
 		} else {
+			for(var i=0; i<threadMessages.length; ++i){
+				threadMessages[i].user.displayName = random_name({seed: threadMessages[i].user.id});
+			}
 			spark.response(threadMessages, message);
 		}
 	});
