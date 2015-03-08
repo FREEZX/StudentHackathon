@@ -9,13 +9,52 @@ var PollResults = {
   controller: function(){
   	this.pollId = m.route.param('pollId');
   	PollStore.loadPollData(this.pollId);
+
+    this.resultsPieConfig = function (ctrl) {
+      return function(element, isInitialized){
+        if(!isInitialized){
+          var series = _.pairs(PollStore.pollData);
+          $(element).highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Browser market shares at a specific website, 2014'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+              type: 'pie',
+              name: 'Answers count',
+              data: series
+            }]
+          });
+        }
+      };
+    };
   },
 
   view: function (ctrl) {
     return [
       	Header.view(),
       	<div class="container" style="margin-top:20px;">
-     		
+          <div config={ctrl.resultsPieConfig()}></div>
       	</div>
     ];
   }
