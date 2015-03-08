@@ -70,7 +70,7 @@ var Library = {
               linkThing = <Link state={{to: '/library/'+libItem._id}} class="btn btn-primary">Open</Link>
             }
             return (
-              <div key={libItem._id} className="col-md-2 filetile">
+              <div key={libItem._id} className="col-md-2 col-sm-2 col-xs-4 filetile">
                 <div className="thumbnail" onclick={ctrl.open} style="height:170px;">
                   <div class="text-center">
                     <i className="fa fa-book fa-4x"/>
