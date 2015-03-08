@@ -10,7 +10,7 @@ var Home = {
 		ChatStore.join();
 
 		this.vm = {};
-		this.vm.message = m.prop('');
+		this.vm.message = this.vm.message || m.prop('');
 
 		this.sendMessage = function(event){
 			event.preventDefault();
