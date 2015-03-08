@@ -47,7 +47,4 @@ ThreadStore.findThreadname = function(id) {
 
 };
 
-
-ThreadStore.loadThreads();
-
 module.exports = ThreadStore;

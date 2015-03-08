@@ -8,6 +8,7 @@ var ThreadStore = require('../stores/ThreadStore');
 
 var Home = {
   controller: function() {
+    ThreadStore.loadThreads();
  		this.openthread= function(event){
  			event.preventDefault();
  			m.route("/thread/"+ctrl.id);

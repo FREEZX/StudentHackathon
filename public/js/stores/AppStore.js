@@ -44,6 +44,6 @@ AppStore.deleteArticle = function(id){
 };
 
 AppStore.getLoggedUser();
-AppStore.loadArticles();
+// AppStore.loadArticles();
 
 module.exports = AppStore;

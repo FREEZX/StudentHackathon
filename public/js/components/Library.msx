@@ -18,15 +18,17 @@ var Library = {
       console.log("test");
       container.addEventListener('drop',onDrop,true)
     }
+
+    this.uploadFile = function(event){
+        console.log('test');
+    }
   },
   view: function (ctrl) {
     return [Header.view(), (
 
         <div className="container" id="drop" style="margin-top:20px;">
-        <div style="position:relative">
-           <input type="file" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" />
-           <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
-        </div>
+        <input id="inputId" type="file" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" />
+        <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>
         <div style="margin-top:5%">
           {LibraryStore.library.valueOf().map(function (libItem) {
             return (

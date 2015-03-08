@@ -5,6 +5,9 @@ var Header = require('./Header');
 var PollStore = require('../stores/PollStore');
 
 var Polls = {
+  controller: function (){
+    PollStore.loadPolls();
+  },
   view: function (ctrl) {
     return [
       Header.view(),

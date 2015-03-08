@@ -36,6 +36,4 @@ CommentStore.deleteComment = function(id){
 	});
 };
 
-//CommentStore.loadComments();
-
 module.exports = CommentStore;

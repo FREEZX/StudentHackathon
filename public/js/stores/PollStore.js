@@ -46,6 +46,4 @@ PollStore.loadPollData = function(pollId){
 };*/
 
 
-PollStore.loadPolls();
-
 module.exports = PollStore;
