@@ -15,8 +15,10 @@ exports.create = function(spark, message) {
 	data = _.extend(data, {
 		user: spark.request.user
 	});
-	spark.primus.room('chat').write({action: 'chatmessage', data: data, seq: 0});
-	spark.response(data, message);
+	if(data.message && data.message.length>0){
+		spark.primus.room('chat').write({action: 'chatmessage', data: data, seq: 0});
+		spark.response(data, message);
+	}
 };
 
 /**

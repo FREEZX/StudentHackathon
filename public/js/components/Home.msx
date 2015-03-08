@@ -20,6 +20,7 @@ var Home = {
                   <li>Library</li>
                   <li>Forum</li>
                   <li>Polls</li>
+                  <li>Chat</li>
                 </ul>
               </p>
               <blockquote>
