@@ -47,13 +47,13 @@ var SigninForm = {
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user addon-icon"></i></div>
-                        <input type="text" class="form-control input-lg" name="username" placeholder="Enter username" value={ctrl.vm.username()} onchange={m.withAttr("value", ctrl.vm.username)}></input>
+                        <input type="text" class="form-control input-lg" name="username" placeholder="Enter username" value={ctrl.vm.username()} onblur={m.withAttr("value", ctrl.vm.username)}></input>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-key addon-icon"></i></div>
-                        <input type="password" class="form-control input-lg" name="password" placeholder="Enter password" value={ctrl.vm.password()} onchange={m.withAttr("value", ctrl.vm.password)}></input>
+                        <input type="password" class="form-control input-lg" name="password" placeholder="Enter password" value={ctrl.vm.password()} onblur={m.withAttr("value", ctrl.vm.password)}></input>
                       </div> 
                     </div>
                     <div class="form-group">
