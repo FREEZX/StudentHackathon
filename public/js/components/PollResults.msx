@@ -13,7 +13,7 @@ var PollResults = {
     this.resultsPieConfig = function (ctrl) {
       return function(element, isInitialized){
         if(!isInitialized){
-          var series = _.pairs(PollStore.pollData);
+          var series = _.pairs(PollStore.pollData.summary);
           $(element).highcharts({
             chart: {
                 plotBackgroundColor: null,
@@ -21,7 +21,7 @@ var PollResults = {
                 plotShadow: false
             },
             title: {
-                text: 'Browser market shares at a specific website, 2014'
+                text: PollStore.pollData.title
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

@@ -21,7 +21,10 @@ var Polls = {
       }
 
   		primus.request('/pollanswers/create', {poll: self.pollId, answers: array} ).then(function(answer){
-  			m.route('/poll/'+pollId+'/results')
+        console.log('got answer ');
+        console.log(answer);
+        console.log(self.pollId);
+  			m.route('/poll/'+self.pollId+'/results')
   		});
   	};
     this.modifyAnswer = function(event) {

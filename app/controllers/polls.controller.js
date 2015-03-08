@@ -48,7 +48,7 @@ exports.read = function(spark, message) {
 		var poll = spark.request.poll.toObject();
 		poll.summary = answerSum;
 		
-		spark.response(answerSum, message);
+		spark.response(poll, message);
 	});
 };
 
