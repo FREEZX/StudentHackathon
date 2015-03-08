@@ -72,8 +72,17 @@ exports.delete = function(spark, message) {
 /**
  * List of Articles
  */
-exports.list = function(spark, message) {
-	File.find().sort('-created').limit(30).populate('user', 'displayName').exec(function(err, files) {
+exports.list = function(spark, message, query) {
+	var fquery = {};
+	if(query && query.parent && query.parent.length) {
+		fquery.parent = query.parent
+	} else {
+		fquery.parent = {
+			$exists: false
+		};
+	}
+
+	File.find(fquery).sort('-created').limit(30).populate('user', 'displayName').exec(function(err, files) {
 		if (err) {
 			return spark.status(400).error({
 				message: errorHandler.getErrorMessage(err)

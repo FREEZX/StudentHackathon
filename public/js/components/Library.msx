@@ -10,6 +10,10 @@ var LibraryStore2 = require('../stores/LibraryStore2');
 var Library = {
   controller: function() {
     this.vm = {};
+    var parent = m.route.param('itemId');
+
+    LibraryStore2.loadLibrary(parent);
+
     this.uploadFile = function(event) {
       event.preventDefault();
       var container = document.getElementById('drop');
@@ -18,10 +22,12 @@ var Library = {
       if(fileToUpload!=''){
         this.vm.file_id = (new Date()).getTime();
         this.vm.name = fileToUpload.name;
+        this.vm.parent = parent;
         (new S3Upload({s3_object_name: this.vm.file_id})).uploadFile(fileToUpload);
         LibraryStore2.newLibrary(this.vm)
       }
     }
+
     this.addfolder = function(event) {
       event.preventDefault();
       var fname = document.getElementById("fname").value;
@@ -31,6 +37,7 @@ var Library = {
         this.vm.file_id = (new Date()).getTime();
         this.vm.name = fname;
         this.vm.type = "folder";
+        this.vm.parent = parent;
         LibraryStore2.newLibrary(this.vm)
       }
     }

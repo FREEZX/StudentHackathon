@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 var LibraryStore = {
 	loggedin: m.prop(false),
-	library: Array
+	library: []
 };
 
 LibraryStore.newLibrary= function(library){
@@ -16,9 +16,11 @@ LibraryStore.newLibrary= function(library){
 	});
 };
 
-LibraryStore.loadLibrary = function(){
+LibraryStore.loadLibrary = function(parentId){
+	console.log(parentId);
 	m.startComputation();
-	primus.request('/files/list').then(function(data){
+	primus.request(parentId ? '/files/list?parent='+parentId : '/files/list').then(function(data){
+		console.log(data);
 		LibraryStore.library = data; 
 		m.endComputation();
 	});
@@ -35,7 +37,5 @@ LibraryStore.deleteLibrary = function(id){
 		m.endComputation();
 	});
 };
-
-LibraryStore.loadLibrary();
 
 module.exports = LibraryStore;

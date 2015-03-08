@@ -27,8 +27,7 @@ var ThreadCreate = require('./components/ThreadCreate');
 var Library = require('./components/Library');
 var Polls = require('./components/Polls');
 var Poll = require('./components/Poll');
-var PollResults = require('./components/PollResults')
-var LibraryItem = require('./components/LibraryItem');
+var PollResults = require('./components/PollResults');
 
 m.route.mode = 'hash';
 
@@ -41,11 +40,11 @@ domready(function() {
       '/login': Login,
       '/logout': Logout,
       '/signup': Signup,
-      '/library': Library,
       '/polls': Polls,
       '/poll/:pollId/results': PollResults,
       '/poll/:pollId': Poll,
-      '/library/:itemId': LibraryItem,
+      '/library': Library,
+      '/library/:itemId': Library,
       '/forum' : Forum,
       '/chat' : Chat,
       '/thread/create' : ThreadCreate,
