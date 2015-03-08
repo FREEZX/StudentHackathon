@@ -5,11 +5,11 @@ var m = require('mithril.elements');
 var Header = require('./Header');
 var ChatStore = require('../stores/ChatStore');
 
-var chatinited = false;
 var Home = {
 	controller: function () {
 		ChatStore.join();
-		if(!chatinited){
+		this.chatinited = this.chatinited || false;
+		if(!this.chatinited){
 			this.vm = {};
 			this.vm.message = m.prop('');
 			chatinited = true;
