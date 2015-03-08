@@ -56,7 +56,7 @@ var Library = {
            <input type="file" id="inputId" class="btn btn-default" style="position:absolute; z-index:1; opacity:0; width:70px" onchange={ctrl.uploadFile.bind(ctrl)}/>
            <button class="btn btn-primary" style="position:absolute; top:1px; left:1px;">Upload File</button>  
         </div>
-        <input id="fname" class="pull-right" type="text" style="margin-top:5px; margin-left:2px;"></input>
+        <input id="fname" class="pull-right" type="text" style="margin-top:5px; margin-left:2px;" placeholder="Type folder name"></input>
         <button class="btn btn-success pull-right" style="position:relative; top:1px; left:1px; margin-left:100px;" onclick={ctrl.addfolder}> Create Folder</button>
         
 
