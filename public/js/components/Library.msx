@@ -5,10 +5,25 @@ var m = require('mithril.elements');
 var Header = require('./Header');
 var LibraryStore = require('../stores/LibraryStore');
 
-var Home = {
-  view: function () {
+var Library = {
+  controller: function() {
+    this.dropFile = function(event) {
+
+    //   function cancel(e) {
+    //   if (e.preventDefault) { e.preventDefault(); }
+    //   return false;
+    // }
+      event.preventDefault();
+      var container = document.getElementById('drop');
+      console.log("test");
+      container.addEventListener('drop',onDrop,true)
+    }
+  },
+  view: function (ctrl) {
     return [Header.view(), (
-        <div className="container" style="margin-top:20px;">
+
+        <div className="container" id="drop" style="margin-top:20px;">
+           <input type="file" class="file" style="margin-bottom:10px;">Browse..</input>
           {LibraryStore.library.valueOf().map(function (libItem) {
             return (
               <div className="col-md-2">
@@ -30,4 +45,4 @@ var Home = {
   }
 };
 
-module.exports = Home;
+module.exports = Library;
