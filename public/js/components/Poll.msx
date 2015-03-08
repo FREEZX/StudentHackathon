@@ -9,17 +9,39 @@ var Polls = {
   controller: function(){
   	this.pollId = m.route.param('pollId');
   	this.type = 'checkbox';
+    this.vm = {};
+    this.vm.answers = new Set();
   	var self = this;
   	this.addAnswer = function() {
-  		primus.request('/pollanswers/create', {poll: self.pollId, answers: ['Odgovor1', 'Odgovor2']} ).then(function(answer){
-  			console.log(answer);
+      var vals = this.vm.answers.values();
+      var array = [];
+      var currVal;
+      while((currVal = vals.next()) && !currVal.done){
+        array.push(currVal.value);
+      }
+
+  		primus.request('/pollanswers/create', {poll: self.pollId, answers: array} ).then(function(answer){
+        console.log('got answer ');
+        console.log(answer);
+        console.log(self.pollId);
+  			m.route('/poll/'+self.pollId+'/results')
   		});
   	};
+    this.modifyAnswer = function(event) {
+      if(event.target.type === 'radio'){
+        this.vm.answers.clear();
+      }
+      if(event.target){
+        this.vm.answers.add(event.target.value);
+      }
+      else {
+        this.vm.answers.remove(event.target.value);
+      }
+    };
   },
 
   view: function (ctrl) {
   	ctrl.poll = _.find(PollStore.polls, function(poll){  return poll._id === ctrl.pollId })
-  	console.log(ctrl.poll);
     return [
       	Header.view(),
       	<div class="container" style="margin-top:20px;">
@@ -37,7 +59,7 @@ var Polls = {
 		                        <li class="list-group-item">
 		                            <div class="checkbox">
 		                                <label>
-		                                    <input type={ctrl.poll.type === 'single' ? 'radio' : 'checkbox'} name="poll-answer" value=""></input>
+		                                    <input type={ctrl.poll.type === 'single' ? 'radio' : 'checkbox'} value={answer} name="poll-answer" onchange={ctrl.modifyAnswer.bind(ctrl)}></input>
 		                                    {answer}
 		                                </label>
 		                            </div>

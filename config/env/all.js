@@ -19,6 +19,7 @@ module.exports = {
 			'lib/lodash/lodash.js',
 			'lib/q/q.js',
 			'lib/jquery/dist/jquery.js',
+			'lib/highcharts-release/highcharts.js',
 			'lib/bootstrap/dist/js/bootstrap.js',
 			'js/s3upload.js',
 			'js/bundle.js'

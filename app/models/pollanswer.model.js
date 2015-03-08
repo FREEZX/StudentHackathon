@@ -32,5 +32,6 @@ var PollAnswerSchema = new Schema({
 });
 
 PollAnswerSchema.index({created: -1});
+PollAnswerSchema.index({user: 1, poll: 1}, {unique: true});
 
 mongoose.model('PollAnswer', PollAnswerSchema);

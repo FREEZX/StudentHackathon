@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.controller'),
 	Poll = mongoose.model('Poll'),
+	PollAnswer = mongoose.model('PollAnswer'),
 	_ = require('lodash');
 
 /**
@@ -31,7 +32,24 @@ exports.create = function(spark, message) {
  * Show the current poll
  */
 exports.read = function(spark, message) {
-	spark.response(spark.request.poll, message);
+	PollAnswer.find({poll: spark.request.poll}, function(err, answers){
+		if (err || !answers) {
+			return spark.status(400).error({
+				message: errorHandler.getErrorMessage(err)
+			}, message);
+		}
+		var answerSum = {};
+		for(var i=0; i<spark.request.poll.answers.length; ++i){
+			var filteredAnswers = _.filter(answers, function(answer) {
+				return _.includes(answer.answers, spark.request.poll.answers[i]);
+			});	
+			answerSum[spark.request.poll.answers[i]] = filteredAnswers.length
+		}
+		var poll = spark.request.poll.toObject();
+		poll.summary = answerSum;
+		
+		spark.response(poll, message);
+	});
 };
 
 /**

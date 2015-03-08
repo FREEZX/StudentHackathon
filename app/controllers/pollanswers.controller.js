@@ -12,18 +12,20 @@ var mongoose = require('mongoose'),
  * Create a pollAnswer
  */
 exports.create = function(spark, message) {
-	var pollAnswer = new PollAnswer(message.data);
-	pollAnswer.user = spark.request.user;
+		var pollAnswer = new PollAnswer(message.data);
+		pollAnswer.user = spark.request.user;
+		PollAnswer.findOneAndRemove({poll: pollAnswer.poll, user: pollAnswer.user}, function(err, doc){
 
-	pollAnswer.save(function(err) {
-		if (err) {
-			console.log(err);
-			return spark.status(400).error({
-				message: errorHandler.getErrorMessage(err)
-			}, message);
-		} else {
-			spark.response(pollAnswer, message);
-		}
+		pollAnswer.save(function(err) {
+			if (err) {
+				console.log(err);
+				return spark.status(400).error({
+					message: errorHandler.getErrorMessage(err)
+				}, message);
+			} else {
+				spark.response(pollAnswer, message);
+			}
+		});
 	});
 };
 
