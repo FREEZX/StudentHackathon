@@ -20,7 +20,7 @@ module.exports = {
 			'lib/q/q.js',
 			'lib/jquery/dist/jquery.js',
 			'lib/bootstrap/dist/js/bootstrap.js',
-			'lib/highcharts-release/highcharts.js',
+			'js/s3upload.js',
 			'js/bundle.js'
 		],
 		css: [

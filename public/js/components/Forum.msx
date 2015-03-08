@@ -24,7 +24,9 @@ var Home = {
             console.log(forumthread);
             return (
   				      <Link class="list-group-item" state={{to: '/thread/'+forumthread._id}}>
-                <span class="badge">{forumthread.comments_count}</span>
+                <div class="pull-right">
+                <span class="glyphicon glyphicon-comment" style="margin-right:5px;"></span>{forumthread.comments_count}
+                </div>
                 <strong>{forumthread.title}</strong>
                 <div>
                 <h6 class="text-muted">Created on: {forumthread.created}</h6>

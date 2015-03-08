@@ -3,12 +3,40 @@
 /** @jsx m */
 var m = require('mithril.elements');
 var Header = require('./Header');
+var ChatStore = require('../stores/ChatStore');
 
 var Home = {
-  view: function () {
+	controller: function () {
+		ChatStore.join();
+
+		this.vm = {};
+		this.vm.message = m.prop('');
+
+		this.sendMessage = function(event){
+			event.preventDefault();
+			var message = this.vm.message();
+			this.vm.message('');
+			ChatStore.send(message);
+		}
+	},
+  view: function (ctrl) {
     return [Header.view(), (
-      <div>
-        
+      <div class="container" style="margin-top:20px;">
+      	<div>
+      		{ChatStore.chatMessages.valueOf().map(function(message){
+      			return (
+      				<div class="well well-sm">
+      					<div><strong>{message.user.displayName}</strong></div>
+      					<div>{message.message}</div>
+      				</div>
+    				)
+      		})}
+      	</div>
+	      	<form onsubmit={ctrl.sendMessage.bind(ctrl)}>
+	      		<label class="">Write Message</label>
+		        <input type="text" class="form-control input-sm col-md-9" value={ctrl.vm.message()} onchange={m.withAttr('value', ctrl.vm.message)}></input><br />
+		        <input type="submit" value="Send" class="btn btn-success" style="margin-top:15px;"></input>
+	        </form>
       </div>
     )];
   }
